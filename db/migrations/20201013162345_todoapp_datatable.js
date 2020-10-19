@@ -10,10 +10,10 @@ exports.up = function(knex, Promise) {
           return knex.schema.createTable('task', 
             // 作成したテーブルにカラムを作成する
             function(table) {
-               // テーブルの要素設定 ←TODOこの通りのテーブルが作成されない(10/13
+               // テーブルの要素設定 ←TODOこの通りのテーブルが作成されない(10/13iki
               table.increments('id').primary();
-              table.varchar('title').notNullable();
-              table.varchar('content').notNullable();
+              table.string('title').notNullable();
+              table.string('content').notNullable();
           });
        //既にテーブルある場合
       }else{

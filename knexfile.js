@@ -8,10 +8,12 @@ module.exports = {
 
     // DB接続設定
     connection: {
-      host     : '127.0.0.1',
       user     : 'root',
       password : 'root',
       database : 'todoapp'
+    },
+    seeds: {
+      directory: './db/seeds/dev'
     },
     // コネクションプールの設定
     pool: {
@@ -23,7 +25,7 @@ module.exports = {
       // マイグレーションファイルの配置先(knexfile.jsからの相対)
       directory:'./db/migrations',
       // マイグレーションを管理するテーブル名
-      tableName: 'task'
+      tableName: 'migration'
     }
   },
   // 開発環境とは異なる環境のマイグレーション実行設定定義 (本番環境,検証環境の差別化等)
