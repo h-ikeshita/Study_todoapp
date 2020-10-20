@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-//html入力フォームからのデータをDBにPOSTする
+//html入力フォームからのデータをDBにPOSTする_登録ボタンのイベント
 router.post('/', function(req, res, next) { 
   var title = req.body.title;
   var content = req.body.content;
@@ -28,13 +28,12 @@ router.post('/', function(req, res, next) {
     .catch(function (error) { console.error(error)
     });
     res.redirect('/'); //リクエスト元にリダイレクトする
-  });
 });
 
-//DBからGETしたデータをres.renderに渡す
+//DBからGETしたデータをres.renderに渡す_todoページのタスク一覧取得
 router.get('/todo', function(req, res, next) {
   knex.select().from('task').then(function(rows) {
-    res.render("todo",{title: "todoapp",taskList: rows})
+    res.render("todo",{title: "todo_app",taskList: rows})
     console.log(rows);
   })
   .catch(function(error) {
@@ -42,7 +41,7 @@ router.get('/todo', function(req, res, next) {
   });
 });
 
-//todoをidで指定してDELETEする
+//todoをidで指定してDELETEする_todoページの削除ボタンのイベント
 router.post('/todo', function (req, res, next) {
   var id = req.body.id;
   knex('task').where('id',id).del().then(function(rows){

@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <title><%= title %></title>
+    <title>TodoList</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
+
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Todo登録</h1>
   </body>
+  <div class="wrapper">
+    <form action="/" method="post" class="task-form">
+    
+    <p>ToDoタイトル<br>
+      <input type="text" name="title" class="input" required></p>
+    <p>ToDo内容<br>
+      <textarea name="content" cols="30" rows="5"></textarea></p>
+      <button type="submit" class="submit">登録</button>
+    <p>※Todoリストの確認は本ページのURLの末尾に/todoを追加すること</p>
+  </form>
+</div>
 </html>
