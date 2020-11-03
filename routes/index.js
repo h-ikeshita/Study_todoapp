@@ -1,8 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-//DBÚ‘±ƒNƒ‰ƒCƒAƒ“ƒg‚ğì¬
-var client = require('knex')({
+
+var passport = require('passport');
+LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
+router.use(passport.initialize());
+router.use(flash());
+router.use(passport.session());
+
+//DBæ¥ç¶šè¨­å®š
+var knex = require('knex')({
   client: 'mysql',
   connection: {
     host: 'localhost',
@@ -13,44 +21,67 @@ var client = require('knex')({
   useNullAsDefault: true
 });
 
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function (req, res, next) {
+  if(req.session.username){
+  res.render("index.ejs");
+  }else{
+    res.redirect("signin");
+  }
 });
 
-//html“ü—ÍƒtƒH[ƒ€‚©‚ç‚Ìƒf[ƒ^‚ğDB‚ÉPOST‚·‚é_“o˜^ƒ{ƒ^ƒ“‚ÌƒCƒxƒ“ƒg
-router.post('/', function(req, res, next) { 
+//ãƒ•ã‚©ãƒ¼ãƒ ã®å…¥åŠ›æƒ…å ±ã‚’DBã¸è¿½åŠ ã€‚
+router.post('/', function (req, res, next) { 
   var title = req.body.title;
   var content = req.body.content;
-  client.insert({ title, content: title, content }).into('task')
-    .then(function (rows) {console.log(rows[0]);
+  knex.insert({ title, content: title, content })
+    .into('task')
+    .then(function (rows) {
+      console.log(rows[0]);
     })
-    .catch(function (error) { console.error(error)
+    .catch(function (error) {
+      console.error(error)
     });
-    res.redirect('/'); //ƒŠƒNƒGƒXƒgŒ³‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚é
+  res.redirect('/');
 });
 
-//DB‚©‚çGET‚µ‚½ƒf[ƒ^‚ğres.render‚É“n‚·_todoƒy[ƒW‚Ìƒ^ƒXƒNˆê——æ“¾
+
 router.get('/todo', function(req, res, next) {
-  knex.select().from('task').then(function(rows) {
-    res.render("todo",{title: "todo_app",taskList: rows})
+  if(req.session.username){
+  knex
+  .select()
+  .from('task')
+  .then(function(rows) {
+    res.render("todo",{title: "TODOã‚¢ãƒ—ãƒª",taskList: rows})
     console.log(rows);
   })
   .catch(function(error) {
     console.error(error)
   });
+}else{
+  res.redirect("signin");
+}
 });
 
-//todo‚ğid‚Åw’è‚µ‚ÄDELETE‚·‚é_todoƒy[ƒW‚Ìíœƒ{ƒ^ƒ“‚ÌƒCƒxƒ“ƒg
+
+
 router.post('/todo', function (req, res, next) {
   var id = req.body.id;
-  knex('task').where('id',id).del().then(function(rows){
+  knex('task')
+  .where('id',id)
+  .del()
+  .then(function(rows){
     console.log(rows);
-    res.redirect('/todo'); //ƒŠƒNƒGƒXƒgŒ³‚ÉƒŠƒ_ƒCƒŒƒNƒg‚·‚é
+    res.redirect('/todo');
   })
   .catch(function(error) {
     console.error(error)
   });
 });
+
+
+
+
 
 module.exports = router;

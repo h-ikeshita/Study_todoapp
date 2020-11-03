@@ -1,13 +1,15 @@
+  
 <html>
   <head>
     <title>TodoList</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include('header') %>
   </head>
   <body>
-    <h1>TodoƒŠƒXƒg</h1>
+    <h1>TodoList</h1>
   </body>
   <div class="wrapper">
-    <ul class="task-list">
+    <ul class="main-task">
       <% taskList.forEach(function(taskItem) { %>
           <li class="main-list__task">
               <div class="task">
@@ -15,7 +17,7 @@
                   <p class="task__content"><%= taskItem.content %></p>
                   <form action="/todo" method="post">
                     <input type="hidden" name="id" value="<%= taskItem.id %>">
-                    <button type="submit" name="button">‚±‚ÌToDo‚ðíœ</button>
+                    <button type="submit" name="button">å‰Šé™¤</button>
                   </form>
               </div>
           </li>
