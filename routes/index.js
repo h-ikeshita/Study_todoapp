@@ -8,7 +8,7 @@ var knex = require('knex')({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'profileapp'
+    database: 'todoapp'
   },
   useNullAsDefault: true
 });
