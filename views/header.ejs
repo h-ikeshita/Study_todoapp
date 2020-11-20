@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <input type="button" onclick="location.href='/'" value="Top Page">
+    <% if(user_name) { %>
+    <input type="button" onclick="location.href='logout'" value="logout">
+    <% }else{ %>
+    <input type="button" onclick="location.href='/login'" value="Login">
+    <% } %>
+</head>
+
+</body>
+
+</html>

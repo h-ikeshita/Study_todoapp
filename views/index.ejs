@@ -4,6 +4,7 @@
   <head>
     <title>TodoList</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include('header',{user_name:user_name}) %>
   </head>
 
   <body>
@@ -17,7 +18,6 @@
     <p>ToDo内容<br>
       <textarea name="content" cols="30" rows="5"></textarea></p>
       <button type="submit" class="submit">登録</button>
-    <p>※Todoリストの確認は本ページのURLの末尾に/todoを追加すること</p>
   </form>
 </div>
 </html>
