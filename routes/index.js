@@ -15,7 +15,7 @@ var knex = require('knex')({
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  if (req.session.username) {
+  if (req.session.user_name) {
     res.render('index', { user_name: req.session.user_name });
   } else {
     res.redirect("login");
@@ -34,39 +34,6 @@ router.post('/', function (req, res, next) {
       console.error(error)
     });
   res.redirect('/');
-});
-
-//タスク一覧を取得
-router.get('/todo', function (req, res, next) {
-  if (req.session.username) {
-    knex
-      .select()
-      .from('task')
-      .then(function (rows) {
-        res.render("todo", { title: "TODOアプリ", taskList: rows })
-        console.log(rows);
-      })
-      .catch(function (error) {
-        console.error(error)
-      });
-  } else {
-    res.redirect("login");
-  }
-});
-
-//タスクを削除
-router.post('/todo', function (req, res, next) {
-  var id = req.body.id;
-  knex('task')
-    .where('id', id)
-    .del()//rowごと削除
-    .then(function (rows) {
-      console.log(rows);
-      res.redirect('/todo');
-    })
-    .catch(function (error) {
-      console.error(error)
-    });
 });
 
 //ログイン

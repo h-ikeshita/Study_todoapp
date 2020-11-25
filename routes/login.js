@@ -24,6 +24,10 @@ passport.deserializeUser((user_name, done) => {
     done(null, user_name);
 });
 
+router.get("/", (req, res) => {
+    res.render("signin", { message: req.flash("message"),user_name: req.session.username });
+  });
+
 //認証処理の実体
 passport.use(
     "local-strategy",
@@ -74,6 +78,7 @@ authenticate = function () {
     );
 };
 
+router.post("/", authenticate());
 
 
 

@@ -7,6 +7,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var signupRouter = require('./routes/signup'); 
 var loginRouter = require('./routes/login');
+var todoRouter = require('./routes/todo');
 var flash = require("connect-flash");
 var bodyParser = require("body-parser");
 var cookieParser = require('cookie-parser');
@@ -45,6 +46,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/signup', signupRouter);
+app.use('/todo', todoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
