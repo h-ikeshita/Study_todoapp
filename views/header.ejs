@@ -1,18 +1,29 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <input type="button" onclick="location.href='/'" value="Top">
-    <input type="button" onclick="location.href='login'" value="Log in">
-    <input type="button" onclick="location.href='signup'" value="Sign up">
-    <input type="button" onclick="location.href='logout'" value="Logout">
-    <input type="button" onclick="location.href='todo'" value="TodoList">
-</head>
-
-<body>
-
-</body>
-
-</html>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">TodoApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Top</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/signup">Signup</a>
+            </li>
+            <% if(user_name){ %>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            <% }else{ %>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">LogIn</a>
+            </li>
+            <% } %>
+            <li class="nav-item">
+                <a class="nav-link" href="todo">Todo</a>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -25,8 +25,8 @@ passport.deserializeUser((user_name, done) => {
 });
 
 router.get("/", (req, res) => {
-    res.render("signin", { message: req.flash("message"),user_name: req.session.username });
-  });
+    res.render("signin", { message: req.flash("message"), user_name: req.session.username });
+});
 
 //認証処理の実体
 passport.use(
